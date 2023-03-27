@@ -4,9 +4,8 @@ import { ForgotPassword } from './ForgotPassword'
 import { LoginPage } from './LoginPage'
 import { Profile } from './Profile'
 import { Register } from './Register'
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { Routes, Route, Link, useNavigate, Navigate } from "react-router-dom";
 import { PageNotFound } from './PageNotFound'
-import Paper from '@mui/material/Paper';
 import { Confirmation } from './Confirmation'
 
 function App() {
@@ -26,11 +25,25 @@ function App() {
         <Route path="/forgotpassword" element={ <ForgotPassword /> } />
         <Route path="/confirmation" element={ <Confirmation /> } />
         <Route path="/changepassword" element={ <ChangePassword /> } />
-        <Route path="/profile" element={ <Profile /> }/>
+        <Route path="/profile" element={ 
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute> }/>
         <Route path="*" element={ <PageNotFound /> } />
       </Routes>
       
     </div>
+  )
+}
+
+function ProtectedRoute({ children }) {
+  const token = localStorage.getItem('token');
+  return (
+    token ?
+    <section>
+      {children}
+    </section> :
+    <Navigate replace to="/"/>
   )
 }
 

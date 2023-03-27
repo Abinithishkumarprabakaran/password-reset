@@ -25,7 +25,7 @@
 .textbox {
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 20px 20px 0px 20px;
     gap: 10px;
 }
 
@@ -36,17 +36,17 @@
 }
 
 .loginButton span {
-    padding: 20px;
+    padding: 0px;
     text-align: center;
 }
 
 .fp {
     display: flex;
-    justify-content: end;
+    justify-content: center;
 }
 
 .fp span {
-    padding: 0px;
+    padding: 15px;
 }
 
 .card-container {
@@ -59,9 +59,14 @@
 
 
 body{
-    background-color: rgb(141, 45, 232);
+    /* background-color: rgb(141, 45, 232); */
+    background: linear-gradient(
+        45deg,
+        #8b51ff,
+        #7a37ff
+    );
 	margin: 0px;
-	min-height: 100vh;
+    height: 100vh;
 }
 
 .profile{
@@ -83,4 +88,8 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.password-matching {
+    padding-left: 20px;
 }
