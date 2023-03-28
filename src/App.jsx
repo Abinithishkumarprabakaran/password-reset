@@ -24,7 +24,7 @@ function App() {
         <Route path="/register" element={ <Register /> } />
         <Route path="/forgotpassword" element={ <ForgotPassword /> } />
         <Route path="/confirmation" element={ <Confirmation /> } />
-        <Route path="/changepassword" element={ 
+        <Route path="/changepassword/:id" element={ 
           <ProtectedRoutePasswordChange>
             <ChangePassword /> 
           </ProtectedRoutePasswordChange>} />

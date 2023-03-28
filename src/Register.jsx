@@ -37,7 +37,7 @@ export function Register() {
     onSubmit: (newUser) => { 
         if(newUser.password === newUser.confirmpassword){
           setShow(show)
-          console.log(newUser)
+          // console.log(newUser)
           addUser(newUser)
         }
         else {

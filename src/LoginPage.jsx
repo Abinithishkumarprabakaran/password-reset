@@ -22,6 +22,9 @@ const formValidationSchema = yup.object({
 
 export function LoginPage() {
 
+  // localStorage.clear()
+  // window.location.href ='/'
+
   const {handleSubmit,handleChange,handleBlur,values,errors,touched} = useFormik({
     initialValues: { 
         username: '', 
@@ -53,12 +56,13 @@ const existedUser = async (loginUser) => {
     });
 
     if(data.status === 401){
-      console.log("Error")
+      // console.log("Error")
+      alert("Please Sign up")
       setShow(true)
     }
     else {
       const result = await data.json()
-      console.log("success", result)
+      // console.log("success", result)
       localStorage.setItem('token', result.token)
       navigate('/profile')
     }

@@ -49,9 +49,9 @@ const existedUser = async (confirmedUser) => {
     });
 
     if(data.status === 404){
-      console.log("Please Sign Up")
+      // console.log("Please Sign Up")
       alert("Please Sign Up")
-      setShow(true)
+      // setShow(true)
     }
     else {
       const result = await data.json()
