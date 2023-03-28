@@ -3,8 +3,62 @@ import Card from '@mui/material/Card';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
+import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import { API } from "../global.js";
+import { useState } from 'react';
+
+const formValidationSchema = yup.object({
+  username: yup
+          .string()
+          .email()
+          .required()
+})
 
 export function Confirmation() {
+
+  const {handleSubmit,handleChange,handleBlur,values,errors,touched} = useFormik({
+    initialValues: { 
+        username: ''},
+
+    validationSchema: formValidationSchema,
+    onSubmit: (confirmedUser) => { 
+      console.log(confirmedUser)
+          existedUser(confirmedUser)
+    }
+  });
+
+const navigate = useNavigate();
+
+const [show, setShow] = useState(false);
+
+const styles = {
+  display: show ? "block" : "none",
+  color: "red"
+}
+
+const existedUser = async (confirmedUser) => {
+
+    const data = await fetch(`${API}/confirmation`, {
+        method: "POST",
+        body: JSON.stringify(confirmedUser),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+
+    if(data.status === 401){
+      console.log("Please Sign Up")
+      setShow(true)
+    }
+    else {
+      const result = await data.json()
+      return result;
+    }
+    navigate('/forgotpassword')
+};
+
   return (
     <div className="container">
       <div className="loginpage">
@@ -15,21 +69,31 @@ export function Confirmation() {
             <h4>Confirm your Email</h4>
           </div>
 
-          <form>
+          <form onSubmit={handleSubmit}>
 
             <div className="textbox">
-              <TextField type="email" label="Enter your email" variant="outlined"/>
+            <TextField 
+                name="username" 
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.username}
+                label="Email" 
+                variant="standard"
+                error={errors.username && touched.username}
+                helperText={errors.username && touched.username ? errors.username: null}
+                />
             </div>
+
+            {show ? <lable style={styles} className="password-matching">Please Sign Up</lable> : null}
 
             <div className="loginButton">
               <Button
+                type="submit"
                 className="submit-button"
                 variant="contained" 
-                onClick={()=>console.log("Confirm Button")}>
-                  Confirm
+              >
+                Send Link
               </Button>
-
-              <Link className="fp" href="/forgotpassword"> <span>Confirmed</span> </Link>
             </div>
      
           </form>
