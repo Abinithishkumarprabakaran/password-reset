@@ -5,8 +5,8 @@ import { LoginPage } from './LoginPage'
 import { Profile } from './Profile'
 import { Register } from './Register'
 import { Routes, Route, Link, useNavigate, Navigate } from "react-router-dom";
-import { PageNotFound } from './PageNotFound'
-import { Confirmation } from './Confirmation'
+import { PageNotFound } from './PageNotFound';
+import { Confirmation } from './Confirmation';
 
 function App() {
 
@@ -24,11 +24,14 @@ function App() {
         <Route path="/register" element={ <Register /> } />
         <Route path="/forgotpassword" element={ <ForgotPassword /> } />
         <Route path="/confirmation" element={ <Confirmation /> } />
-        <Route path="/changepassword" element={ <ChangePassword /> } />
+        <Route path="/changepassword" element={ 
+          <ProtectedRoutePasswordChange>
+            <ChangePassword /> 
+          </ProtectedRoutePasswordChange>} />
         <Route path="/profile" element={ 
-            <ProtectedRoute>
+            <ProtectedRouteProfile>
               <Profile />
-            </ProtectedRoute> }/>
+            </ProtectedRouteProfile> }/>
         <Route path="*" element={ <PageNotFound /> } />
       </Routes>
       
@@ -36,10 +39,21 @@ function App() {
   )
 }
 
-function ProtectedRoute({ children }) {
+function ProtectedRouteProfile({ children }) {
   const token = localStorage.getItem('token');
   return (
     token ?
+    <section>
+      {children}
+    </section> :
+    <Navigate replace to="/"/>
+  )
+}
+
+function ProtectedRoutePasswordChange({ children }) {
+  const OTP = localStorage.getItem('OTP');
+  return (
+    OTP ?
     <section>
       {children}
     </section> :

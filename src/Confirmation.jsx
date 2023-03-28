@@ -24,7 +24,7 @@ export function Confirmation() {
 
     validationSchema: formValidationSchema,
     onSubmit: (confirmedUser) => { 
-      console.log(confirmedUser)
+      // console.log(confirmedUser)
           existedUser(confirmedUser)
     }
   });
@@ -48,15 +48,16 @@ const existedUser = async (confirmedUser) => {
         },
     });
 
-    if(data.status === 401){
+    if(data.status === 404){
       console.log("Please Sign Up")
+      alert("Please Sign Up")
       setShow(true)
     }
     else {
       const result = await data.json()
-      return result;
+      navigate('/forgotpassword')
     }
-    navigate('/forgotpassword')
+    
 };
 
   return (
@@ -84,7 +85,7 @@ const existedUser = async (confirmedUser) => {
                 />
             </div>
 
-            {show ? <lable style={styles} className="password-matching">Please Sign Up</lable> : null}
+            {/* {show ? <lable style={styles} className="password-matching">Please Sign Up</lable> : null} */}
 
             <div className="loginButton">
               <Button
