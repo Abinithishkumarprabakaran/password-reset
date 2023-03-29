@@ -93,7 +93,7 @@ const existedUser = async (confirmedUser) => {
                 className="submit-button"
                 variant="contained" 
               >
-                Send Link
+                Send OTP
               </Button>
             </div>
      

@@ -85,7 +85,7 @@ export function ForgotPassword() {
                 >
                   Submit
               </Button> 
-              <span>can't get OTP ? <Link className="cp" href="/"> Resend </Link></span>
+              {/* <span>can't get OTP ? <Link className="cp" href="/"> Resend </Link></span> */}
             </div>
      
           </form>

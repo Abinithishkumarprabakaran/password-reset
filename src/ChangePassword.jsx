@@ -101,8 +101,6 @@ const updatePassword = async (updatedPassword) => {
                 >
                   Confirm
               </Button>
-
-              <Link className="fp" href="/"> <span>Confirmed</span> </Link>
             </div>
      
           </form>
